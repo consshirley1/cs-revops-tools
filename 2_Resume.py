@@ -2,17 +2,19 @@ import streamlit as st
 import base64
 from pathlib import Path
 
-st.set_page_config(page_title="Resume — Connor Smith", page_icon="📄", layout="wide")
+st.set_page_config(page_title="Resume — Connor Shirley", page_icon="📄", layout="wide")
 
 st.markdown("""
 <style>
+    .stApp { background-color: #ffffff; }
+    section[data-testid="stSidebar"] { background-color: #f8fafc; }
     .page-title { font-size: 2rem; font-weight: 300; margin-bottom: 0.25rem; }
     .page-title span { color: #1d4ed8; }
     hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">Resume — Connor <span>Smith</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">Resume — Connor <span>Shirley</span></div>', unsafe_allow_html=True)
 st.markdown("Revenue Operations Leader · GTM Engineer")
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -58,6 +60,5 @@ else:
     In the meantime, you can reach me directly to request a copy.
     """)
 
-    st.markdown("📧 **connor@example.com**")
-    st.markdown("💼 **[LinkedIn](https://linkedin.com/in/connor)**")
-    st.info("👉 Update contact details before deploying.")
+    st.markdown("💼 **[LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)**")
+    st.markdown("🐙 **[GitHub](https://github.com/consshirley1)**")

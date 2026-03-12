@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="About — Connor Smith", page_icon="👤", layout="wide")
+st.set_page_config(page_title="About — Connor Shirley", page_icon="👤", layout="wide")
 
 st.markdown("""
 <style>
@@ -17,6 +17,8 @@ st.markdown("""
         border-radius: 3px; margin: 0.2rem 0.2rem 0.2rem 0;
     }
     hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
+    .stApp { background-color: #ffffff; }
+    section[data-testid="stSidebar"] { background-color: #f8fafc; }
     .highlight {
         border-left: 3px solid #1d4ed8;
         padding-left: 1rem;
@@ -30,7 +32,7 @@ st.markdown("""
 col_main, col_side = st.columns([3, 1])
 
 with col_main:
-    st.markdown('<div class="page-title">Connor <span>Smith</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-title">Connor <span>Shirley</span></div>', unsafe_allow_html=True)
     st.markdown("**Revenue Operations Leader · GTM Engineer · AI Tooling**")
     st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -107,8 +109,6 @@ with col_side:
 
     st.markdown('<div class="section-label">Contact</div>', unsafe_allow_html=True)
     st.markdown("""
-    📧 connor@example.com  
-    💼 [LinkedIn](https://linkedin.com/in/connor)  
-    🐙 [GitHub](https://github.com/connor)
+💼 [LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)  
+🐙 [GitHub](https://github.com/consshirley1)
     """)
-    st.info("👉 Update contact details before deploying.")
