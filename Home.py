@@ -57,22 +57,19 @@ with t1:
     st.markdown("**📡 MX Lookup**")
     st.markdown('<div class="tool-meta">Live · No API key required</div>', unsafe_allow_html=True)
     st.caption("Identify any company's email provider via live DNS/MX record lookup. Detects Google Workspace, M365, Mimecast, Proofpoint, and more.")
-    if st.button("Open MX Lookup →", key="btn_mx", use_container_width=True):
-        st.switch_page("pages/3_MX_Lookup.py")
+    st.markdown('<a href="/3_MX_Lookup" target="_self" style="display:inline-block;padding:0.4rem 1rem;background:#1d4ed8;color:#fff;border-radius:4px;text-decoration:none;font-size:0.85rem;">Open MX Lookup →</a>', unsafe_allow_html=True)
 
 with t2:
     st.markdown("**🤖 Company Summarizer**")
     st.markdown('<div class="tool-meta">AI-Powered · Gemini API</div>', unsafe_allow_html=True)
     st.caption("Enter a company name or domain and get an AI-generated GTM one-pager: overview, ICP, tech stack signals, and RevOps relevance.")
-    if st.button("Open Summarizer →", key="btn_sum", use_container_width=True):
-        st.switch_page("pages/4_Company_Summarizer.py")
+    st.markdown('<a href="/4_Company_Summarizer" target="_self" style="display:inline-block;padding:0.4rem 1rem;background:#1d4ed8;color:#fff;border-radius:4px;text-decoration:none;font-size:0.85rem;">Open Summarizer →</a>', unsafe_allow_html=True)
 
 with t3:
     st.markdown("**🇫🇷 INSEE Gap Detector**")
     st.markdown('<div class="tool-meta">Demo · Mock Data</div>', unsafe_allow_html=True)
     st.caption("Salesforce account coverage gap analysis for the French market. Uses SIREN numbers to surface accounts missing from CRM.")
-    if st.button("Open Gap Detector →", key="btn_insee", use_container_width=True):
-        st.switch_page("pages/5_INSEE_Gap_Detector.py")
+    st.markdown('<a href="/5_INSEE_Gap_Detector" target="_self" style="display:inline-block;padding:0.4rem 1rem;background:#1d4ed8;color:#fff;border-radius:4px;text-decoration:none;font-size:0.85rem;">Open Gap Detector →</a>', unsafe_allow_html=True)
 
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<div class="section-label">About & Background</div>', unsafe_allow_html=True)
@@ -82,11 +79,9 @@ a1, a2 = st.columns(2)
 with a1:
     st.markdown("**👤 About Me**")
     st.caption("Background, experience, and what I'm looking for in a senior RevOps role.")
-    if st.button("View About →", key="btn_about", use_container_width=True):
-        st.switch_page("pages/1_About.py")
+    st.markdown('<a href="/1_About" target="_self" style="display:inline-block;padding:0.4rem 1rem;background:#1d4ed8;color:#fff;border-radius:4px;text-decoration:none;font-size:0.85rem;">View About →</a>', unsafe_allow_html=True)
 
 with a2:
     st.markdown("**📄 Resume**")
     st.caption("View or download my full resume.")
-    if st.button("View Resume →", key="btn_resume", use_container_width=True):
-        st.switch_page("pages/2_Resume.py")
+    st.markdown('<a href="/2_Resume" target="_self" style="display:inline-block;padding:0.4rem 1rem;background:#1d4ed8;color:#fff;border-radius:4px;text-decoration:none;font-size:0.85rem;">View Resume →</a>', unsafe_allow_html=True)
