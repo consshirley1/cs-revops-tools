@@ -1,34 +1,29 @@
 import streamlit as st
 import pandas as pd
 import random
+from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT, mermaid_chart
 
 st.set_page_config(page_title="INSEE Gap Detector", page_icon="🇫🇷", layout="wide")
+st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-st.markdown("""
+st.markdown(f"""
 <style>
-    .page-title { font-size: 2rem; font-weight: 300; margin-bottom: 0.25rem; }
-    .page-title span { color: #1d4ed8; }
-    hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
-    .section-label {
-        font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em;
-        text-transform: uppercase; color: #9ca3af; margin-bottom: 0.5rem;
-    }
-    .demo-banner {
+    .demo-banner {{
         background: #fffbeb; border: 1px solid #fcd34d;
         border-radius: 6px; padding: 0.75rem 1rem;
         font-size: 0.85rem; color: #92400e; margin-bottom: 1.5rem;
-    }
-    .metric-card {
-        border: 1px solid #e5e7eb; border-radius: 6px;
-        padding: 1rem 1.25rem; text-align: center;
-    }
-    .metric-num { font-size: 1.75rem; font-weight: 300; color: #111827; }
-    .metric-label { font-size: 0.75rem; color: #9ca3af; margin-top: 0.1rem; }
+    }}
+    .metric-card {{
+        border: 1px solid {TEAL_LIGHT}; border-radius: 8px;
+        padding: 1rem 1.25rem; text-align: center; background: #ffffff;
+    }}
+    .metric-num   {{ font-size: 1.75rem; font-weight: 300; color: {DARK}; }}
+    .metric-label {{ font-size: 0.75rem; color: {TEAL_MID}; margin-top: 0.1rem; }}
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="page-title">🇫🇷 INSEE <span>Gap Detector</span></div>', unsafe_allow_html=True)
-st.markdown("Salesforce account coverage analysis for the French market — identifying whitespace by SIREN number.")
+st.markdown(f"<p style='color:{DARK};'>Salesforce account coverage analysis for the French market — identifying whitespace by SIREN number.</p>", unsafe_allow_html=True)
 
 st.markdown("""
 <div class="demo-banner">
@@ -38,7 +33,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- Mock data ---
 @st.cache_data
 def get_mock_data():
     random.seed(42)
@@ -96,7 +90,6 @@ def get_mock_data():
 
 df = get_mock_data()
 
-# --- Filters ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<div class="section-label">Filters</div>', unsafe_allow_html=True)
 
@@ -109,7 +102,6 @@ with f2:
 with f3:
     sf_filter = st.selectbox("Salesforce Status", ["All", "In Salesforce ✅", "Missing from Salesforce ⚠️"])
 
-# Apply filters
 filtered = df.copy()
 if search:
     filtered = filtered[
@@ -123,7 +115,6 @@ if sf_filter == "In Salesforce ✅":
 elif sf_filter == "Missing from Salesforce ⚠️":
     filtered = filtered[filtered["In Salesforce"] == False]
 
-# --- Metrics ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<div class="section-label">Coverage Summary</div>', unsafe_allow_html=True)
 
@@ -136,13 +127,12 @@ coverage_pct = round((in_sf / total * 100), 1) if total > 0 else 0
 with m1:
     st.markdown(f'<div class="metric-card"><div class="metric-num">{total}</div><div class="metric-label">Companies in View</div></div>', unsafe_allow_html=True)
 with m2:
-    st.markdown(f'<div class="metric-card"><div class="metric-num" style="color:#10b981">{in_sf}</div><div class="metric-label">In Salesforce</div></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="metric-card"><div class="metric-num" style="color:{TEAL_DARK}">{in_sf}</div><div class="metric-label">In Salesforce</div></div>', unsafe_allow_html=True)
 with m3:
     st.markdown(f'<div class="metric-card"><div class="metric-num" style="color:#ef4444">{missing}</div><div class="metric-label">Missing from SF</div></div>', unsafe_allow_html=True)
 with m4:
     st.markdown(f'<div class="metric-card"><div class="metric-num">{coverage_pct}%</div><div class="metric-label">Coverage Rate</div></div>', unsafe_allow_html=True)
 
-# --- Table ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<div class="section-label">Account Records</div>', unsafe_allow_html=True)
 
@@ -163,7 +153,6 @@ st.dataframe(
     }
 )
 
-# --- Export ---
 st.markdown("<hr>", unsafe_allow_html=True)
 gaps_only = filtered[filtered["In Salesforce"] == False][["Company", "SIREN", "City", "Industry", "Employees"]]
 
@@ -177,8 +166,24 @@ if len(gaps_only) > 0:
 else:
     st.info("No gaps in current filtered view.")
 
+# ── How it works ─────────────────────────────────────────────────────────────
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("""
+st.markdown('<div class="section-label">How It Works</div>', unsafe_allow_html=True)
+
+mermaid_chart("""
+flowchart LR
+    A[(INSEE Registry\\nBigQuery)] --> C[Coverage Matcher\\nSIREN cross-reference]
+    B[(Salesforce CRM\\nAccount Records)] --> C
+    C --> D{In Salesforce?}
+    D -->|Yes| E[✅ Covered Account]
+    D -->|No| F[⚠️ Gap Detected]
+    F --> G[Export CSV\\nImport-ready list]
+    E --> H([Dashboard\\n+ Coverage Metrics])
+    G --> H
+""", height=240)
+
+st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown(f"""
 **How the production version works:**
 1. Pulls the full INSEE établissement registry from BigQuery (`insee-enrichment` project)
 2. Cross-references against Salesforce account SIREN fields via a custom cross-org lookup
