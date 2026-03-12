@@ -151,6 +151,46 @@ def home_page():
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
+    # ── Projects ──────────────────────────────────────────────────────────────
+    st.markdown('<div class="section-label">Strategic Projects</div>', unsafe_allow_html=True)
+
+    p1, p2, p3, _ = st.columns([2, 2, 2, 1])
+
+    with p1:
+        st.markdown("""
+        <div class="tool-card">
+            <div class="tool-name">🗂️ GTM Stack Unification</div>
+            <span class="tool-badge badge-live">● LumApps · 2024–2025</span>
+            <div class="tool-desc">Merged 15 tools into a single unified stack post-acquisition,
+            including 2 CRMs and 2 MAPs — across a 150-person GTM org.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with p2:
+        st.markdown("""
+        <div class="tool-card">
+            <div class="tool-name">🤖 AI Micro-App Suite</div>
+            <span class="tool-badge badge-ai">✦ AI-Powered · Claude + Gemini</span>
+            <div class="tool-desc">5 production AI apps shipped in 6 weeks: intent enrichment,
+            data enrichment, one-pager generation, inbound SDR, and competitor detection.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with p3:
+        st.markdown("""
+        <div class="tool-card">
+            <div class="tool-name">📈 MEDDPIC & Forecast Rebuild</div>
+            <span class="tool-badge badge-live">● LumApps · 2022–2023</span>
+            <div class="tool-desc">Standardized MEDDPIC across an 80-person international org
+            and rebuilt forecast infrastructure — improving accuracy by 60%+.</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    if st.button("View All Projects →", key="card_projects", type="primary"):
+        st.switch_page("pages/6_Projects.py")
+
+    st.markdown("<hr>", unsafe_allow_html=True)
+
     # ── About & Resume ────────────────────────────────────────────────────────
     st.markdown('<div class="section-label">About & Background</div>', unsafe_allow_html=True)
 
@@ -194,6 +234,9 @@ pg = st.navigation(
             st.Page("pages/3_MX_Lookup.py", title="MX Lookup", icon="📡"),
             st.Page("pages/4_Company_Summarizer.py", title="Company Summarizer", icon="🤖"),
             st.Page("pages/5_INSEE_Gap_Detector.py", title="INSEE Gap Detector", icon="🇫🇷"),
+        ],
+        "Projects": [
+            st.Page("pages/6_Projects.py", title="Projects", icon="🗂️"),
         ],
     }
 )
