@@ -23,7 +23,7 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">🔬 Lead <span>Researcher</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">Lead <span>Researcher</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};'>Paste a LinkedIn bio or company 'About Us' text to get a RevOps-ready executive brief.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -51,7 +51,7 @@ if not api_key:
     )
     st.markdown(f"""
     <div class="key-help">
-        🔑 Free key at <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a>.
+        Free key at <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a>.
         Your key is used only for this session and never stored.
     </div>
     """, unsafe_allow_html=True)
@@ -116,7 +116,7 @@ if run and raw_text:
             result = response.text
 
             st.markdown("<hr>", unsafe_allow_html=True)
-            st.markdown(f"<h3 style='color:{DARK};'>📋 Executive Brief</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='color:{DARK};'>Executive Brief</h3>", unsafe_allow_html=True)
             st.markdown(result)
 
         except Exception as e:

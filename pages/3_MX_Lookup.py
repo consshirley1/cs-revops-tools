@@ -28,61 +28,61 @@ PROVIDERS = [
     {
         "match": lambda hosts: any(re.search(r"google|gmail|googlemail", h, re.I) for h in hosts),
         "name": "Google Workspace", "type": "Cloud Email · Google",
-        "icon": "📧", "crm": "Common with Salesforce, HubSpot",
+        "icon": "", "crm": "Common with Salesforce, HubSpot",
         "segment": "SMB → Enterprise", "confidence": "High",
     },
     {
         "match": lambda hosts: any(re.search(r"outlook|hotmail|microsoft|office365|protection\.outlook", h, re.I) for h in hosts),
         "name": "Microsoft 365", "type": "Cloud Email · Microsoft",
-        "icon": "📨", "crm": "Common with Dynamics, Salesforce",
+        "icon": "", "crm": "Common with Dynamics, Salesforce",
         "segment": "Mid-Market → Enterprise", "confidence": "High",
     },
     {
         "match": lambda hosts: any(re.search(r"mimecast", h, re.I) for h in hosts),
         "name": "Mimecast", "type": "Email Security Gateway",
-        "icon": "🛡️", "crm": "Gateway — underlying provider varies",
+        "icon": "", "crm": "Gateway — underlying provider varies",
         "segment": "Enterprise", "confidence": "Medium",
     },
     {
         "match": lambda hosts: any(re.search(r"proofpoint", h, re.I) for h in hosts),
         "name": "Proofpoint", "type": "Email Security Gateway",
-        "icon": "🔒", "crm": "Gateway — underlying provider varies",
+        "icon": "", "crm": "Gateway — underlying provider varies",
         "segment": "Enterprise", "confidence": "Medium",
     },
     {
         "match": lambda hosts: any(re.search(r"barracuda", h, re.I) for h in hosts),
         "name": "Barracuda", "type": "Email Security Gateway",
-        "icon": "🔐", "crm": "Gateway — underlying provider varies",
+        "icon": "", "crm": "Gateway — underlying provider varies",
         "segment": "SMB → Mid-Market", "confidence": "Medium",
     },
     {
         "match": lambda hosts: any(re.search(r"mailgun", h, re.I) for h in hosts),
         "name": "Mailgun", "type": "Transactional Email",
-        "icon": "⚡", "crm": "Developer / transactional use",
+        "icon": "", "crm": "Developer / transactional use",
         "segment": "Startup → Tech", "confidence": "High",
     },
     {
         "match": lambda hosts: any(re.search(r"sendgrid", h, re.I) for h in hosts),
         "name": "SendGrid / Twilio", "type": "Transactional Email",
-        "icon": "📤", "crm": "Developer / transactional use",
+        "icon": "", "crm": "Developer / transactional use",
         "segment": "Startup → Mid-Market", "confidence": "High",
     },
     {
         "match": lambda hosts: any(re.search(r"amazonses|amazon", h, re.I) for h in hosts),
         "name": "Amazon SES", "type": "Cloud Email · AWS",
-        "icon": "☁️", "crm": "Developer / transactional use",
+        "icon": "", "crm": "Developer / transactional use",
         "segment": "Startup → Enterprise", "confidence": "High",
     },
     {
         "match": lambda hosts: any(re.search(r"zoho", h, re.I) for h in hosts),
         "name": "Zoho Mail", "type": "Cloud Email · Zoho",
-        "icon": "📬", "crm": "Often paired with Zoho CRM",
+        "icon": "", "crm": "Often paired with Zoho CRM",
         "segment": "SMB", "confidence": "High",
     },
     {
         "match": lambda hosts: any(re.search(r"protonmail|proton\.me", h, re.I) for h in hosts),
         "name": "Proton Mail", "type": "Encrypted Email · Proton",
-        "icon": "🔏", "crm": "Privacy-first, rare in enterprise",
+        "icon": "", "crm": "Privacy-first, rare in enterprise",
         "segment": "SMB → Privacy-focused", "confidence": "High",
     },
 ]
@@ -134,13 +134,13 @@ def identify_provider(mx_records):
             return p
     return {
         "name": "Unknown / Custom", "type": "Self-hosted or custom MTA",
-        "icon": "❓", "crm": "Requires manual investigation",
+        "icon": "", "crm": "Requires manual investigation",
         "segment": "Unknown", "confidence": "Low",
     }
 
 
 # --- UI ---
-st.markdown('<div class="page-title">📡 MX Lookup — <span>Email Provider Identifier</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">MX Lookup — <span>Email Provider Identifier</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};'>Enter any domain to identify its email provider via live DNS/MX record lookup.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -191,7 +191,7 @@ if run and domain_input:
         <div class="provider-box">
             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                 <div>
-                    <div class="provider-name">{provider['icon']} {provider['name']}</div>
+                    <div class="provider-name">{provider['name']}</div>
                     <div class="provider-type">{provider['type']}</div>
                 </div>
                 <div>{conf_tag}</div>
@@ -250,15 +250,15 @@ st.markdown('<div class="section-label">How It Works</div>', unsafe_allow_html=T
 
 mermaid_chart("""
 flowchart LR
-    A([User\\nDomain Input]) --> B[Clean Domain\\nStrip http / www]
-    B --> C{DNS Resolver\\ndnspython}
-    C -->|MX Records| D[Provider Matcher\\n10 pattern rules]
-    C -->|TXT Records| E[Security Checker\\nSPF / DMARC]
-    D --> F[Provider Card\\nIcon + Confidence]
-    E --> G[Security Flags\\nPass / Fail]
-    F --> H([Results Display])
+    A([Domain Input]) --> B[Clean Domain]
+    B --> C{DNS Resolver}
+    C -->|MX Records| D[Provider Matcher]
+    C -->|TXT Records| E[Security Checker]
+    D --> F[Provider Card]
+    E --> G[SPF / DMARC Flags]
+    F --> H([Results])
     G --> H
-""", height=220)
+""", height=200)
 
 st.markdown("<hr>", unsafe_allow_html=True)
 st.caption("Uses live DNS resolution via dnspython. No data is stored or logged.")

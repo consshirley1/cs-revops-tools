@@ -22,12 +22,12 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">🔐 Permission Set <span>Auditor</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">Permission Set <span>Auditor</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};'>RevOps governance tool that identifies permission creep by auditing Salesforce user rights against a defined security baseline.</p>", unsafe_allow_html=True)
 
 st.markdown(f"""
 <div class="demo-banner">
-    ℹ️ <strong>Demo Mode</strong> — Uses mock permission data. The production version connects to the
+    <strong>Demo Mode</strong> — Uses mock permission data. The production version connects to the
     Salesforce Metadata API to pull live ObjectPermissions and SetupEntityAccess records.
 </div>
 """, unsafe_allow_html=True)
@@ -69,21 +69,21 @@ def audit_user(permissions: dict) -> pd.DataFrame:
     for perm, assigned in permissions.items():
         baseline_allowed = baseline_permissions.get(perm, False)
         if assigned and not baseline_allowed:
-            status = "🚨 High Risk (Violation)"
+            status = "High Risk (Violation)"
         elif assigned and baseline_allowed:
-            status = "✅ Approved"
+            status = "Approved"
         elif not assigned:
-            status = "⚪ Not Assigned"
+            status = "Not Assigned"
         else:
-            status = "⚪ Not Assigned"
+            status = "Not Assigned"
         rows.append({"Permission": perm, "Assigned": assigned, "Baseline": baseline_allowed, "Audit Status": status})
     return pd.DataFrame(rows)
 
 
 def color_status(val):
-    if "🚨" in str(val):
+    if "High Risk" in str(val):
         return "background-color: #fee2e2; color: #b91c1c; font-weight: 600;"
-    if "✅" in str(val):
+    if "Approved" in str(val):
         return f"background-color: {TEAL_LIGHT}; color: {TEAL_DARK}; font-weight: 600;"
     return "color: #9ca3af;"
 
@@ -95,8 +95,8 @@ selected_user = st.selectbox("User", list(users.keys()), label_visibility="colla
 audit_df = audit_user(users[selected_user])
 
 # ── Risk summary ──────────────────────────────────────────────────────────────
-violations = audit_df[audit_df["Audit Status"].str.contains("🚨")]
-approved = audit_df[audit_df["Audit Status"].str.contains("✅")]
+violations = audit_df[audit_df["Audit Status"].str.contains("High Risk")]
+approved = audit_df[audit_df["Audit Status"].str.contains("Approved")]
 
 m1, m2, m3 = st.columns(3)
 with m1:
@@ -108,7 +108,7 @@ with m3:
     st.metric(label, len(violations))
 
 if len(violations) > 0:
-    st.error(f"**{len(violations)} security violation{'s' if len(violations) > 1 else ''} detected** for **{selected_user}**. Review the table below.")
+    st.error(f"**{len(violations)} security violation{'s' if len(violations) > 1 else ''}** detected for **{selected_user}**. Review the table below.")
 
 # ── Permission table ──────────────────────────────────────────────────────────
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -139,7 +139,7 @@ if len(violations) > 0:
         </div>
         """, unsafe_allow_html=True)
 else:
-    st.success(f"✅ No violations detected for **{selected_user}**. All permissions are within the defined baseline.")
+    st.success(f"No violations detected for **{selected_user}**. All permissions are within the defined baseline.")
 
 # ── How it works ─────────────────────────────────────────────────────────────
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -150,12 +150,12 @@ flowchart LR
     A[(Salesforce\\nMetadata API\\nPermission Sets)] --> B[Audit Engine\\nBaseline Comparison]
     C[(Security Baseline\\nIT / Security Policy)] --> B
     B --> D{Violation Check}
-    D -->|Assigned AND not in baseline| E[🚨 High Risk Flag]
-    D -->|Assigned AND in baseline| F[✅ Approved]
-    D -->|Not Assigned| G[⚪ Not Assigned]
+    D -->|Assigned AND not in baseline| E[High Risk Flag]
+    D -->|Assigned AND in baseline| F[Approved]
+    D -->|Not Assigned| G[Not Assigned]
     E & F & G --> H[Permission Table\\nRAG Status]
     H --> I([Remediation\\nLeast Privilege Model])
 """, height=260)
 
 st.markdown("<hr>", unsafe_allow_html=True)
-st.caption("🛠️ Built to simulate Salesforce ObjectPermissions and SetupEntityAccess metadata checks. Production connects via Metadata API or Tooling API.")
+st.caption("Built to simulate Salesforce ObjectPermissions and SetupEntityAccess metadata checks. Production connects via Metadata API or Tooling API.")

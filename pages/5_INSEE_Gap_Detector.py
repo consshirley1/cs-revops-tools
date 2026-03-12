@@ -22,12 +22,12 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">🇫🇷 INSEE <span>Gap Detector</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">INSEE <span>Gap Detector</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};'>Salesforce account coverage analysis for the French market — identifying whitespace by SIREN number.</p>", unsafe_allow_html=True)
 
 st.markdown("""
 <div class="demo-banner">
-    ⚠️ <strong>Demo Mode</strong> — This tool uses mock data to illustrate the concept.
+    <strong>Demo Mode</strong> — This tool uses mock data to illustrate the concept.
     The production version queries a BigQuery dataset backed by the full INSEE établissement registry
     and cross-references live Salesforce account records.
 </div>
@@ -100,7 +100,7 @@ with f2:
     industries = ["All"] + sorted(df["Industry"].unique().tolist())
     industry_filter = st.selectbox("Industry", industries)
 with f3:
-    sf_filter = st.selectbox("Salesforce Status", ["All", "In Salesforce ✅", "Missing from Salesforce ⚠️"])
+    sf_filter = st.selectbox("Salesforce Status", ["All", "In Salesforce", "Missing from Salesforce"])
 
 filtered = df.copy()
 if search:
@@ -110,9 +110,9 @@ if search:
     ]
 if industry_filter != "All":
     filtered = filtered[filtered["Industry"] == industry_filter]
-if sf_filter == "In Salesforce ✅":
+if sf_filter == "In Salesforce":
     filtered = filtered[filtered["In Salesforce"] == True]
-elif sf_filter == "Missing from Salesforce ⚠️":
+elif sf_filter == "Missing from Salesforce":
     filtered = filtered[filtered["In Salesforce"] == False]
 
 st.markdown("<hr>", unsafe_allow_html=True)
@@ -137,7 +137,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<div class="section-label">Account Records</div>', unsafe_allow_html=True)
 
 display_df = filtered.copy()
-display_df["Status"] = display_df["In Salesforce"].apply(lambda x: "✅ In Salesforce" if x else "⚠️ Gap Detected")
+display_df["Status"] = display_df["In Salesforce"].apply(lambda x: "In Salesforce" if x else "Gap Detected")
 display_df = display_df.drop(columns=["In Salesforce"])
 cols = ["Status", "Company", "SIREN", "City", "Industry", "Employees", "SF Stage", "SF Owner"]
 display_df = display_df[cols]
@@ -158,7 +158,7 @@ gaps_only = filtered[filtered["In Salesforce"] == False][["Company", "SIREN", "C
 
 if len(gaps_only) > 0:
     st.download_button(
-        f"⬇️ Export {len(gaps_only)} Gap{'s' if len(gaps_only) != 1 else ''} to CSV",
+        f"Export {len(gaps_only)} Gap{'s' if len(gaps_only) != 1 else ''} to CSV",
         data=gaps_only.to_csv(index=False),
         file_name="insee_sf_gaps.csv",
         mime="text/csv",

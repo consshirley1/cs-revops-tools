@@ -63,10 +63,10 @@ with st.sidebar:
     st.divider()
     st.markdown("#### Contact")
     st.markdown("""
-📞 [(509) 496-7013](tel:5094967013)
-📧 [consshirley@gmail.com](mailto:consshirley@gmail.com)
-💼 [LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)
-🐙 [GitHub](https://github.com/consshirley1)
+[(509) 496-7013](tel:5094967013)
+[consshirley@gmail.com](mailto:consshirley@gmail.com)
+[LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)
+[GitHub](https://github.com/consshirley1)
 """)
 
 # ── Main content ──────────────────────────────────────────────────────────────

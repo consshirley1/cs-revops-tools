@@ -20,12 +20,12 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">📈 White Space <span>Mapper</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">White Space <span>Mapper</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};'>Simulates a Salesforce white space analysis — identifying cross-sell gaps in your account base by product penetration and industry.</p>", unsafe_allow_html=True)
 
 st.markdown(f"""
 <div class="demo-banner">
-    ℹ️ <strong>Demo Mode</strong> — Uses mock Salesforce account data to illustrate the concept.
+    <strong>Demo Mode</strong> — Uses mock Salesforce account data to illustrate the concept.
     In production, this pulls live from a Salesforce report export or SOQL query.
 </div>
 """, unsafe_allow_html=True)
@@ -43,12 +43,12 @@ df = pd.DataFrame(data)
 
 def suggest_next_step(row):
     if not row["Product A — CRM"]:
-        return "🎯 Target for Core CRM"
+        return "Target for Core CRM"
     if row["Product A — CRM"] and not row["Product B — Analytics"]:
-        return "📊 Suggest Analytics (CRM user)"
+        return "Suggest Analytics (CRM user)"
     if row["Product B — Analytics"] and not row["Product C — AI Suite"]:
-        return "🤖 Suggest AI Suite (High maturity)"
-    return "✅ Fully Penetrated"
+        return "Suggest AI Suite (High maturity)"
+    return "Fully Penetrated"
 
 
 df["Recommended Play"] = df.apply(suggest_next_step, axis=1)
@@ -113,9 +113,9 @@ st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<div class="section-label">Strategic Insights — Top Cross-Sell Opportunities</div>', unsafe_allow_html=True)
 
 plays = {
-    "📊 Suggest Analytics (CRM user)": "Ready for Analytics upsell (have CRM, missing Analytics)",
-    "🤖 Suggest AI Suite (High maturity)": "High-maturity accounts ready for AI expansion",
-    "🎯 Target for Core CRM": "Unactivated accounts — start with CRM",
+    "Suggest Analytics (CRM user)": "Ready for Analytics upsell (have CRM, missing Analytics)",
+    "Suggest AI Suite (High maturity)": "High-maturity accounts ready for AI expansion",
+    "Target for Core CRM": "Unactivated accounts — start with CRM",
 }
 
 cols = st.columns(len(plays))
@@ -133,7 +133,7 @@ for col, (play, description) in zip(cols, plays.items()):
             st.dataframe(targets[["Account Name", "Industry"]], hide_index=True, use_container_width=True)
 
 st.markdown("<hr>", unsafe_allow_html=True)
-st.info(f"💡 **RevOps Tip:** In Salesforce, automate this using a Summary Formula on a custom report or a Flow that updates a 'Next Best Action' field on the Account object. Combine with territory rules for automatic rep assignment.")
+st.info(f"**RevOps Tip:** In Salesforce, automate this using a Summary Formula on a custom report or a Flow that updates a 'Next Best Action' field on the Account object. Combine with territory rules for automatic rep assignment.")
 
 # ── How it works ─────────────────────────────────────────────────────────────
 st.markdown("<hr>", unsafe_allow_html=True)

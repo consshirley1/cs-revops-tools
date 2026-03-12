@@ -16,7 +16,7 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">🤖 Company <span>Summarizer</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">Company <span>Summarizer</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};'>Enter a company name or domain and get an AI-generated RevOps-focused one-pager.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -44,7 +44,7 @@ if not api_key:
     )
     st.markdown(f"""
     <div class="key-help">
-        🔑 Get a free API key at
+        Get a free API key at
         <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a>.
         Free tier: 15 requests/min, 1M tokens/day. Your key is used only for this session and never stored.
     </div>
@@ -132,7 +132,7 @@ if run and company_input:
 
             st.markdown("<hr>", unsafe_allow_html=True)
             st.download_button(
-                "⬇️ Download as Markdown",
+                "Download as Markdown",
                 data=f"# {company_input} — RevOps One-Pager\n*Focus: {focus}*\n\n{result}",
                 file_name=f"{company_input.lower().replace(' ', '_')}_summary.md",
                 mime="text/markdown",

@@ -19,7 +19,7 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">🔍 SOQL <span>Translator</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">SOQL <span>Translator</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};'>Converts plain English to Salesforce SOQL — and helps non-technical stakeholders understand the queries running their business.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -43,7 +43,7 @@ if not api_key:
     key_input = st.text_input("Google Gemini API Key", type="password", placeholder="AIza...")
     st.markdown(f"""
     <div class="key-help">
-        🔑 Free key at <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a>.
+        Free key at <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a>.
         The Manual Builder tab works without a key.
     </div>
     """, unsafe_allow_html=True)
@@ -63,7 +63,7 @@ else:
 st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── Tabs ──────────────────────────────────────────────────────────────────────
-tab1, tab2 = st.tabs(["🤖 AI — Natural Language to SOQL", "🏗️ Manual Query Builder"])
+tab1, tab2 = st.tabs(["AI — Natural Language to SOQL", "Manual Query Builder"])
 
 with tab1:
     st.markdown(f"<h4 style='color:{DARK};font-weight:500;'>Describe what data you need in plain English</h4>", unsafe_allow_html=True)
@@ -100,7 +100,7 @@ Request: {user_input}"""
                     st.markdown("<hr>", unsafe_allow_html=True)
                     st.markdown(f"<div class='section-label'>Generated SOQL</div>", unsafe_allow_html=True)
                     st.code(query, language="sql")
-                    st.info("💡 **RevOps Tip:** Always include a `LIMIT` clause in high-volume environments to prevent governor limit issues. Use `OFFSET` for pagination.")
+                    st.info("**RevOps Tip:** Always include a `LIMIT` clause in high-volume environments to prevent governor limit issues. Use `OFFSET` for pagination.")
 
                 except Exception as e:
                     err = str(e)
@@ -182,15 +182,11 @@ st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown('<div class="section-label">How It Works</div>', unsafe_allow_html=True)
 
 mermaid_chart("""
-flowchart LR
-    subgraph AI [AI Tab — Natural Language]
-        A([Plain English\\nQuery Description]) --> B[Gemini 1.5 Flash\\nSOQL instruction prompt]
-        B --> C([SOQL Code Block\\nwith LIMIT])
-    end
-    subgraph Manual [Manual Builder]
-        D([Object + Fields\\n+ Filter + Ordering]) --> E[Query Builder\\nString assembly]
-        E --> F([Generated SOQL\\n+ Logic Map])
-    end
+flowchart TB
+    A([Plain English Request]) --> B[Gemini 1.5 Flash]
+    B --> C([AI-Generated SOQL])
+    D([Object + Fields + Conditions]) --> E[Visual Query Builder]
+    E --> F([Generated SOQL + Logic Map])
 """, height=220)
 
 st.markdown("<hr>", unsafe_allow_html=True)

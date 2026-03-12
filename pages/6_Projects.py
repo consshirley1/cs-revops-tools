@@ -246,7 +246,7 @@ with st.sidebar:
 project = next(p for p in projects if p["name"] == selected_name)
 
 # ── Page header ───────────────────────────────────────────────────────────────
-st.markdown('<div class="page-title">🗂️ Strategic <span>Projects</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">Strategic <span>Projects</span></div>', unsafe_allow_html=True)
 st.markdown(f"<p style='color:{DARK};font-size:0.9rem;'>Key initiatives structured via STAR methodology — Situation, Task, Action, Result.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
@@ -273,7 +273,7 @@ a_col, r_col = st.columns(2)
 with s_col:
     st.markdown(f"""
     <div class="star-box">
-        <div class="star-label">🔍 Situation</div>
+        <div class="star-label">Situation</div>
         <p style="font-size:0.88rem;color:{DARK};line-height:1.65;margin:0;">{project["star"]["situation"]}</p>
     </div>
     """, unsafe_allow_html=True)
@@ -281,7 +281,7 @@ with s_col:
 with t_col:
     st.markdown(f"""
     <div class="star-box">
-        <div class="star-label">🎯 Task</div>
+        <div class="star-label">Task</div>
         <p style="font-size:0.88rem;color:{DARK};line-height:1.65;margin:0;">{project["star"]["task"]}</p>
     </div>
     """, unsafe_allow_html=True)
@@ -291,7 +291,7 @@ st.markdown("<div style='height:0.75rem'></div>", unsafe_allow_html=True)
 with a_col:
     st.markdown(f"""
     <div class="star-box">
-        <div class="star-label">⚙️ Action</div>
+        <div class="star-label">Action</div>
         <p style="font-size:0.88rem;color:{DARK};line-height:1.65;margin:0;">{project["star"]["action"]}</p>
     </div>
     """, unsafe_allow_html=True)
@@ -299,7 +299,7 @@ with a_col:
 with r_col:
     st.markdown(f"""
     <div class="result-box">
-        <div class="star-label" style="color:{TEAL_DARK};">📈 Result</div>
+        <div class="star-label" style="color:{TEAL_DARK};">Result</div>
         <p style="font-size:0.88rem;color:{DARK};line-height:1.65;margin:0;">{project["star"]["result"]}</p>
     </div>
     """, unsafe_allow_html=True)

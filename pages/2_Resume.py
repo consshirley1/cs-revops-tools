@@ -26,7 +26,7 @@ if RESUME_PATH.exists():
 
     # Download button
     st.download_button(
-        label="⬇️ Download Resume (PDF)",
+        label="Download Resume (PDF)",
         data=pdf_bytes,
         file_name="Connor_Shirley_Resume.pdf",
         mime="application/pdf",
@@ -60,5 +60,5 @@ else:
     In the meantime, you can reach me directly to request a copy.
     """)
 
-    st.markdown("💼 **[LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)**")
-    st.markdown("🐙 **[GitHub](https://github.com/consshirley1)**")
+    st.markdown("**[LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)**")
+    st.markdown("**[GitHub](https://github.com/consshirley1)**")
