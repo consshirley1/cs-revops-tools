@@ -1,39 +1,27 @@
 import streamlit as st
 import google.generativeai as genai
+from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT, mermaid_chart
 
 st.set_page_config(page_title="Company Summarizer", page_icon="🤖", layout="wide")
+st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-st.markdown("""
+st.markdown(f"""
 <style>
-    .page-title { font-size: 2rem; font-weight: 300; margin-bottom: 0.25rem; }
-    .page-title span { color: #1d4ed8; }
-    hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
-    .section-label {
-        font-size: 0.65rem; font-weight: 500; letter-spacing: 0.15em;
-        text-transform: uppercase; color: #9ca3af; margin-bottom: 0.5rem;
-    }
-    .result-box {
-        border: 1px solid #e5e7eb; border-radius: 6px;
-        padding: 1.5rem; background: #f8fafc;
-    }
-    .key-help {
-        background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 6px;
-        padding: 0.85rem 1rem; font-size: 0.82rem; color: #6b7280;
+    .key-help {{
+        background: {TEAL_LIGHT}; border: 1px solid {TEAL_MID}55; border-radius: 6px;
+        padding: 0.85rem 1rem; font-size: 0.82rem; color: {DARK};
         margin-top: 0.5rem;
-    }
-    .key-help a { color: #1d4ed8; text-decoration: none; }
+    }}
+    .key-help a {{ color: {TEAL_DARK}; text-decoration: none; }}
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">🤖 Company <span>Summarizer</span></div>', unsafe_allow_html=True)
-st.markdown("Enter a company name or domain and get an AI-generated RevOps-focused one-pager.")
+st.markdown('<div class="page-title">Company <span>Summarizer</span></div>', unsafe_allow_html=True)
+st.markdown(f"<p style='color:{DARK};'>Enter a company name or domain and get an AI-generated RevOps-focused one-pager.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
-# --- Model config ---
-# Swap to "gemini-1.5-pro" for higher quality, or "gemini-2.0-flash" for latest
-GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_MODEL = "gemini-2.5-flash"
 
-# --- API key: Streamlit secrets → session state → manual input ---
 if "gemini_api_key" not in st.session_state:
     st.session_state.gemini_api_key = None
 
@@ -54,12 +42,11 @@ if not api_key:
         placeholder="AIza...",
         label_visibility="visible",
     )
-    st.markdown("""
+    st.markdown(f"""
     <div class="key-help">
-        🔑 Get a free API key at
+        Get a free API key at
         <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a>.
-        Free tier: 15 requests/min, 1M tokens/day — more than enough for a portfolio demo.
-        Your key is used only for this session and never stored.
+        Free tier: 15 requests/min, 1M tokens/day. Your key is used only for this session and never stored.
     </div>
     """, unsafe_allow_html=True)
 
@@ -78,7 +65,6 @@ else:
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
-# --- Inputs ---
 col_left, col_right = st.columns([2, 1])
 
 with col_left:
@@ -102,7 +88,6 @@ for i, ex in enumerate(examples):
 
 run = st.button("Generate Summary →", type="primary", disabled=not api_key)
 
-# --- Prompts ---
 SYSTEM_PROMPT = """You are a RevOps research assistant. When given a company name or domain,
 produce a concise, structured one-pager optimized for GTM and sales intelligence.
 
@@ -126,7 +111,6 @@ FOCUS_ADDENDUM = {
     "Competitive Landscape": "Emphasize competitive positioning, market alternatives, and differentiation.",
 }
 
-# --- Run ---
 if run and company_input:
     with st.spinner(f"Researching {company_input}…"):
         try:
@@ -148,7 +132,7 @@ if run and company_input:
 
             st.markdown("<hr>", unsafe_allow_html=True)
             st.download_button(
-                "⬇️ Download as Markdown",
+                "Download as Markdown",
                 data=f"# {company_input} — RevOps One-Pager\n*Focus: {focus}*\n\n{result}",
                 file_name=f"{company_input.lower().replace(' ', '_')}_summary.md",
                 mime="text/markdown",
@@ -160,12 +144,28 @@ if run and company_input:
                 st.error("❌ Invalid API key. Double-check your key at aistudio.google.com.")
                 st.session_state.gemini_api_key = None
             elif "RESOURCE_EXHAUSTED" in err or "quota" in err.lower():
-                st.error("⏱️ Rate limit reached. Wait a moment and try again, or check your quota at aistudio.google.com.")
+                st.error("⏱️ Rate limit reached. Wait a moment and try again.")
             else:
                 st.error(f"Something went wrong: {err}")
 
 elif run and not company_input:
     st.warning("Please enter a company name or domain.")
+
+# ── How it works ─────────────────────────────────────────────────────────────
+st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown('<div class="section-label">How It Works</div>', unsafe_allow_html=True)
+
+mermaid_chart("""
+flowchart LR
+    A([Company Name\\nor Domain]) --> B[Focus Selector\\nGTM / General / Competitive]
+    B --> C[System Prompt\\n8-section template]
+    C --> D[Gemini 1.5 Flash\\ngoogle-generativeai]
+    D --> E[Structured Markdown\\nOne-Pager]
+    E --> F[ICP Profile]
+    E --> G[Tech Stack Signals]
+    E --> H[RevOps Relevance]
+    E --> I([⬇️ Download .md])
+""", height=240)
 
 st.markdown("<hr>", unsafe_allow_html=True)
 st.caption(f"Powered by Google Gemini ({GEMINI_MODEL}). Free tier: 15 req/min, 1M tokens/day. Results reflect model training data.")
