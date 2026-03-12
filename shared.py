@@ -46,27 +46,6 @@ div.stButton > button[kind="secondary"] {{
 }}
 div.stButton > button[kind="secondary"]:hover {{ background-color: {DARK} !important; }}
 
-/* ── Equal-height columns ── */
-div[data-testid="stHorizontalBlock"] {{
-    align-items: stretch;
-}}
-div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {{
-    display: flex;
-    flex-direction: column;
-}}
-div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] {{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}}
-div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stMarkdownContainer"] {{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}}
-div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stMarkdownContainer"] > div.tool-card {{
-    flex: 1;
-}}
 
 /* ── Cards ── */
 .tool-card {{
