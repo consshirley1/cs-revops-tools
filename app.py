@@ -272,6 +272,9 @@ pg = st.navigation(
         "Background": [
             st.Page("pages/1_About.py", title="About"),
         ],
+        "Projects": [
+            st.Page("pages/6_Projects.py", title="Projects"),
+        ],
         "Tools": [
             st.Page("pages/3_MX_Lookup.py",          title="MX Lookup"),
             st.Page("pages/4_Company_Summarizer.py",  title="Company Summarizer"),
@@ -280,9 +283,6 @@ pg = st.navigation(
             st.Page("pages/8_SFDC_Account_Mapper.py", title="White Space Mapper"),
             st.Page("pages/9_SFDC_Perm.py",           title="Permission Auditor"),
             st.Page("pages/10_SOQL_to_Human.py",      title="SOQL Translator"),
-        ],
-        "Projects": [
-            st.Page("pages/6_Projects.py", title="Projects"),
         ],
     }
 )
