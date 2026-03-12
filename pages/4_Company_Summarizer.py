@@ -70,7 +70,7 @@ col_left, col_right = st.columns([2, 1])
 with col_left:
     company_input = st.text_input(
         "Company name or domain",
-        placeholder="e.g. Notion, linear.app, figma.com",
+        placeholder="e.g. Salesforce, HubSpot, gong.io",
     )
 
 with col_right:
@@ -78,13 +78,6 @@ with col_right:
         "Output focus",
         ["GTM & Sales Intel", "General Overview", "Competitive Landscape"],
     )
-
-examples = ["Notion", "Linear", "Figma", "Rippling", "Lattice"]
-ex_cols = st.columns(len(examples))
-for i, ex in enumerate(examples):
-    with ex_cols[i]:
-        if st.button(ex, key=f"ex_{ex}", use_container_width=True):
-            company_input = ex
 
 run = st.button("Generate Summary →", type="primary", disabled=not api_key)
 
