@@ -46,11 +46,12 @@ div.stButton > button[kind="secondary"] {{
 }}
 div.stButton > button[kind="secondary"]:hover {{ background-color: {DARK} !important; }}
 
+
 /* ── Cards ── */
 .tool-card {{
     border: 1px solid {TEAL_LIGHT}; border-radius: 8px;
     padding: 1.25rem 1.25rem 0.75rem 1.25rem; background: #ffffff;
-    display: flex; flex-direction: column; height: 100%;
+    display: flex; flex-direction: column;
 }}
 .tool-name {{ font-size: 1rem; font-weight: 600; color: {DARK}; margin-bottom: 0.2rem; }}
 .tool-badge {{

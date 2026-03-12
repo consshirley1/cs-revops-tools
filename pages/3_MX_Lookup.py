@@ -144,23 +144,11 @@ st.markdown('<div class="page-title">MX Lookup — <span>Email Provider Identifi
 st.markdown(f"<p style='color:{DARK};'>Enter any domain to identify its email provider via live DNS/MX record lookup.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
-col_input, col_examples = st.columns([3, 2])
-
-with col_input:
-    domain_input = st.text_input(
-        "Domain",
-        placeholder="company.com",
-        label_visibility="collapsed",
-    )
-
-with col_examples:
-    st.markdown(f"<div style='margin-top: 0.4rem; font-size: 0.8rem; color: {TEAL_MID};'>Try: </div>", unsafe_allow_html=True)
-    ex_cols = st.columns(5)
-    examples = ["google.com", "microsoft.com", "salesforce.com", "stripe.com", "hubspot.com"]
-    for i, ex in enumerate(examples):
-        with ex_cols[i]:
-            if st.button(ex, key=f"ex_{ex}", use_container_width=True):
-                domain_input = ex
+domain_input = st.text_input(
+    "Domain",
+    placeholder="company.com",
+    label_visibility="collapsed",
+)
 
 run = st.button("Run Lookup →", type="primary", use_container_width=False)
 

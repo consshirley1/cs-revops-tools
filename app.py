@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT
 
 
@@ -57,7 +58,7 @@ def home_page():
             st.markdown("<div style='height:0.6rem'></div>", unsafe_allow_html=True)
             st.markdown(f'<div class="stat-box"><div class="stat-num">20+</div><div class="stat-label">GTM Tools<br>Implemented</div></div>', unsafe_allow_html=True)
         with s2:
-            st.markdown(f'<div class="stat-box"><div class="stat-num">7</div><div class="stat-label">Production<br>Apps Shipped</div></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Production<br>Apps Shipped</div></div>', unsafe_allow_html=True)
             st.markdown("<div style='height:0.6rem'></div>", unsafe_allow_html=True)
             st.markdown(f'<div class="stat-box"><div class="stat-num">$140M</div><div class="stat-label">Company Scale<br>Owned</div></div>', unsafe_allow_html=True)
 
@@ -251,6 +252,31 @@ def home_page():
             "https://www.linkedin.com/in/connorshirley/",
             use_container_width=True,
         )
+
+    components.html("""
+<script>
+(function() {
+    var doc = window.parent.document;
+    function eq() {
+        doc.querySelectorAll('.stHorizontalBlock').forEach(function(row) {
+            var cards = Array.from(row.querySelectorAll('.tool-card'));
+            if (cards.length < 2) return;
+            cards.forEach(function(c) { c.style.minHeight = ''; });
+            var maxH = Math.max.apply(null, cards.map(function(c) { return c.offsetHeight; }));
+            cards.forEach(function(c) { c.style.minHeight = maxH + 'px'; });
+        });
+    }
+    var timer;
+    var obs = new MutationObserver(function() {
+        clearTimeout(timer);
+        timer = setTimeout(eq, 100);
+    });
+    obs.observe(doc.body, {childList: true, subtree: true});
+    eq();
+    setTimeout(function() { obs.disconnect(); }, 10000);
+}());
+</script>
+""", height=0)
 
 
 # ── Navigation shell ──────────────────────────────────────────────────────────
