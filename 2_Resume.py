@@ -14,8 +14,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">Resume — Connor <span>Smith</span></div>', unsafe_allow_html=True)
-st.markdown("Revenue Operations Leader · GTM Engineer")
+st.markdown('<div class="page-title">Resume — Connor <span>Shirley</span></div>', unsafe_allow_html=True)
+st.markdown("RevOps Leader turned GTM Engineer · AI Deployment · CRM Architecture")
 st.markdown("<hr>", unsafe_allow_html=True)
 
 RESUME_PATH = Path("assets/resume.pdf")
@@ -28,7 +28,7 @@ if RESUME_PATH.exists():
     st.download_button(
         label="⬇️ Download Resume (PDF)",
         data=pdf_bytes,
-        file_name="Connor_Smith_Resume.pdf",
+        file_name="Connor_Shirley_Resume.pdf",
         mime="application/pdf",
     )
 
@@ -44,7 +44,7 @@ if RESUME_PATH.exists():
         style="border: 1px solid #e5e7eb; border-radius: 4px;"
         type="application/pdf">
         <p>Your browser doesn't support inline PDFs.
-        <a href="data:application/pdf;base64,{b64}" download="Connor_Smith_Resume.pdf">Download instead.</a></p>
+        <a href="data:application/pdf;base64,{b64}" download="Connor_Shirley_Resume.pdf">Download instead.</a></p>
     </iframe>
     """
     st.markdown(pdf_display, unsafe_allow_html=True)
