@@ -14,7 +14,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="page-title">Resume — Connor <span>Shirley</span></div>', unsafe_allow_html=True)
+st.markdown('<div class="page-title">Resume — Connor <span>Smith</span></div>', unsafe_allow_html=True)
 st.markdown("Revenue Operations Leader · GTM Engineer")
 st.markdown("<hr>", unsafe_allow_html=True)
 
