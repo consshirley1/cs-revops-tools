@@ -1,32 +1,34 @@
 import streamlit as st
+from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT
 
-st.set_page_config(page_title="About — Connor Shirley", page_icon="👤", layout="wide")
+st.set_page_config(page_title="About — Connor Shirley", page_icon=None, layout="wide")
+st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
-st.markdown("""
+st.markdown(f"""
 <style>
-    .stApp { background-color: #ffffff; }
-    section[data-testid="stSidebar"] { background-color: #f8fafc; }
-    .tag {
-        display: inline-block; background: #eff6ff; color: #1d4ed8;
+    .tag {{
+        display: inline-block; background: {TEAL_LIGHT}; color: {TEAL_DARK};
         font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 3px;
         margin: 0.2rem 0.2rem 0.2rem 0; font-weight: 500;
-    }
-    .tag-gray {
-        display: inline-block; background: #f3f4f6; color: #4b5563;
+    }}
+    .tag-gray {{
+        display: inline-block; background: {TEAL_LIGHT}; color: {DARK};
         font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 3px;
         margin: 0.2rem 0.2rem 0.2rem 0; font-weight: 500;
-    }
-    .tag-green {
-        display: inline-block; background: #ecfdf5; color: #065f46;
+    }}
+    .tag-green {{
+        display: inline-block; background: {TEAL_LIGHT}; color: {TEAL_MID};
         font-size: 0.72rem; padding: 0.2rem 0.65rem; border-radius: 3px;
         margin: 0.2rem 0.2rem 0.2rem 0; font-weight: 500;
-    }
+    }}
+    .stat-num {{ font-size: 1.8rem; font-weight: 300; color: {TEAL_DARK}; }}
+    .stat-label {{ font-size: 0.78rem; color: {DARK}; margin-top: 0.2rem; }}
 </style>
 """, unsafe_allow_html=True)
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("#### Core Skills")
+    st.markdown(f"<div class='section-label'>Core Skills</div>", unsafe_allow_html=True)
 
     skills_tech = ["Salesforce", "BigQuery", "Google Apps Script", "Python",
                    "Outreach", "ZoomInfo", "Spiff", "Showpad", "Nooks",
@@ -37,85 +39,81 @@ with st.sidebar:
                    "Executive Reporting", "Data Governance", "Corporate Strategy"]
     skills_meth = ["MEDDPIC", "Challenger", "JOLT", "Command of the Message"]
 
-    st.markdown("**Tech & Tools**")
+    st.markdown(f"<div class='section-label' style='margin-top:0.5rem;'>Tech & Tools</div>", unsafe_allow_html=True)
     st.markdown("".join(f'<span class="tag">{s}</span>' for s in skills_tech), unsafe_allow_html=True)
-    st.markdown("**RevOps & Strategy**")
+    st.markdown(f"<div class='section-label' style='margin-top:0.75rem;'>RevOps & Strategy</div>", unsafe_allow_html=True)
     st.markdown("".join(f'<span class="tag-gray">{s}</span>' for s in skills_ops), unsafe_allow_html=True)
-    st.markdown("**Methodologies**")
+    st.markdown(f"<div class='section-label' style='margin-top:0.75rem;'>Methodologies</div>", unsafe_allow_html=True)
     st.markdown("".join(f'<span class="tag-green">{s}</span>' for s in skills_meth), unsafe_allow_html=True)
 
-    st.divider()
-    st.markdown("#### Domain Expertise")
-    st.markdown("""
-- Intranet / Digital Workplace SaaS
-- B2B Mid-Market & Enterprise (F500)
-- Post-merger GTM integration
-- French market (INSEE / SIREN)
-- Seed → PE Exit journeys
-""")
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown(f"<div class='section-label'>Domain Expertise</div>", unsafe_allow_html=True)
+    st.markdown(f"""
+<p style='font-size:0.82rem;color:{DARK};line-height:1.6;'>
+Intranet / Digital Workplace SaaS<br>
+B2B Mid-Market &amp; Enterprise (F500)<br>
+Post-merger GTM integration<br>
+French market (INSEE / SIREN)<br>
+Seed to PE Exit journeys
+</p>""", unsafe_allow_html=True)
 
-    st.divider()
-    st.markdown("#### Education")
-    st.markdown("**B.A., MENAS & Criminal Justice**  \nUniversity of Arizona, Tucson")
-    st.markdown("**MEDDPICC Academy for Managers**")
-    st.markdown("**IBM — RAG & Agentic AI**")
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown(f"<div class='section-label'>Education</div>", unsafe_allow_html=True)
+    st.markdown(f"<p style='font-size:0.82rem;color:{DARK};line-height:1.6;'><strong>B.A., MENAS &amp; Criminal Justice</strong><br>University of Arizona, Tucson<br><br><strong>MEDDPICC Academy for Managers</strong><br><br><strong>IBM — RAG &amp; Agentic AI</strong></p>", unsafe_allow_html=True)
 
-    st.divider()
-    st.markdown("#### Contact")
-    st.markdown("""
-[(509) 496-7013](tel:5094967013)
-[consshirley@gmail.com](mailto:consshirley@gmail.com)
-[LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)
-[GitHub](https://github.com/consshirley1)
-""")
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.markdown(f"<div class='section-label'>Contact</div>", unsafe_allow_html=True)
+    st.markdown(f"<p style='font-size:0.82rem;color:{DARK};line-height:1.8;'><a href='tel:5094967013' style='color:{TEAL_DARK};'>(509) 496-7013</a><br><a href='mailto:consshirley@gmail.com' style='color:{TEAL_DARK};'>consshirley@gmail.com</a><br><a href='https://www.linkedin.com/in/connor-shirley-93986954/' style='color:{TEAL_DARK};'>LinkedIn</a><br><a href='https://github.com/consshirley1' style='color:{TEAL_DARK};'>GitHub</a></p>", unsafe_allow_html=True)
 
 # ── Main content ──────────────────────────────────────────────────────────────
-st.markdown("# Connor Shirley")
-st.markdown("**RevOps Leader turned GTM Engineer** · AI Deployment · CRM Architecture · $140M Scale")
-st.divider()
+st.markdown('<div class="page-title">Connor <span>Shirley</span></div>', unsafe_allow_html=True)
+st.markdown(f"<p style='color:{TEAL_MID};font-size:0.95rem;'>RevOps Leader turned GTM Engineer &nbsp;·&nbsp; AI Deployment &nbsp;·&nbsp; CRM Architecture &nbsp;·&nbsp; $140M Scale</p>", unsafe_allow_html=True)
+st.markdown("<hr>", unsafe_allow_html=True)
 
-st.info("""
+st.markdown(f"""
+<div style='background:{TEAL_LIGHT};border-radius:8px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;font-size:0.9rem;color:{DARK};line-height:1.7;'>
 I build the systems that make revenue teams faster — from CRM architecture and tool stack design
 to AI agents and custom micro-apps. Seven years scaling B2B SaaS GTM from seed to PE exit, with
 hands-on ownership of forecasting, acquisition integrations, and live AI deployment. I sit at the
 intersection of GTM and engineering, which means I can design it, build it, and get buy-in on it.
-""")
+</div>
+""", unsafe_allow_html=True)
 
 c1, c2, c3, c4 = st.columns(4)
-c1.metric("Years in B2B SaaS GTM", "7")
-c2.metric("Production AI Apps Shipped", "5")
-c3.metric("GTM Tools Implemented", "20+")
-c4.metric("Company Scale Owned", "$140M")
+for col, num, label in [
+    (c1, "7",     "Years in B2B SaaS GTM"),
+    (c2, "5",     "Production AI Apps Shipped"),
+    (c3, "20+",   "GTM Tools Implemented"),
+    (c4, "$140M", "Company Scale Owned"),
+]:
+    col.markdown(f"""
+    <div style='text-align:center;padding:0.75rem 0;'>
+        <div class='stat-num'>{num}</div>
+        <div class='stat-label'>{label}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-st.divider()
+st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── What I Do ─────────────────────────────────────────────────────────────────
-st.markdown("### What I Do")
+st.markdown(f"<h3 style='color:{DARK};font-weight:400;'>What I Do</h3>", unsafe_allow_html=True)
 
-st.markdown("""
-**GTM Stack Architecture** — I've led simultaneous multi-tool rollouts across Sales, Marketing,
-and CS, including 20+ tool deployments over four years spanning Outreach, ZoomInfo, Spiff, Showpad,
-Nooks, LinkedIn Sales Navigator, and more. I own the full lifecycle: vendor selection, implementation,
-enablement, and governance.
+for title, body in [
+    ("GTM Stack Architecture",
+     "Led simultaneous multi-tool rollouts across Sales, Marketing, and CS, including 20+ tool deployments over four years spanning Outreach, ZoomInfo, Spiff, Showpad, Nooks, LinkedIn Sales Navigator, and more. I own the full lifecycle: vendor selection, implementation, enablement, and governance."),
+    ("AI-Powered RevOps Tooling",
+     "I design and ship internal AI tools that actually get used. Recent work includes 5 production AI micro-apps (intent enrichment, custom data enrichment, one-pager generation, inbound SDR, competitor detection) using Claude and Gemini, deployed to a 150-person GTM org in 6 weeks."),
+    ("CRM Strategy & Migration",
+     "Owned complex Salesforce migrations through post-merger integrations, including cross-org data reconciliation, field schema design, and executive stakeholder communication. I build the tooling that makes these projects visible and de-risked."),
+    ("Data & Reporting Infrastructure",
+     "From BigQuery pipelines to executive dashboards, I build the operational infrastructure that gives leadership a real-time pulse on pipeline health and GTM execution."),
+]:
+    st.markdown(f"<p style='color:{DARK};font-size:0.92rem;line-height:1.7;'><strong>{title}</strong> — {body}</p>", unsafe_allow_html=True)
 
-**AI-Powered RevOps Tooling** — I design and ship internal AI tools that actually get used.
-Recent work includes 5 production AI micro-apps (intent enrichment, custom data enrichment,
-one-pager generation, inbound SDR, competitor detection) using Claude and Gemini, deployed to a
-150-person GTM org in 6 weeks.
-
-**CRM Strategy & Migration** — I've owned complex Salesforce migrations through post-merger
-integrations, including cross-org data reconciliation, field schema design, and executive
-stakeholder communication. I build the tooling that makes these projects visible and de-risked.
-
-**Data & Reporting Infrastructure** — From BigQuery pipelines to executive dashboards,
-I build the operational infrastructure that gives leadership a real-time pulse on pipeline
-health and GTM execution.
-""")
-
-st.divider()
+st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── Experience ────────────────────────────────────────────────────────────────
-st.markdown("### Experience")
+st.markdown(f"<h3 style='color:{DARK};font-weight:400;'>Experience</h3>", unsafe_allow_html=True)
 
 experience = [
     {
@@ -172,37 +170,22 @@ experience = [
 ]
 
 for job in experience:
-    st.markdown(f"**{job['title']}**  \n*{job['company']} · {job['dates']}*")
+    st.markdown(f"<p style='color:{DARK};margin-bottom:0.1rem;'><strong>{job['title']}</strong><br><span style='color:{TEAL_MID};font-size:0.85rem;'>{job['company']} · {job['dates']}</span></p>", unsafe_allow_html=True)
     if "desc" in job:
-        st.caption(job["desc"])
+        st.markdown(f"<p style='font-size:0.82rem;color:{DARK};opacity:0.75;margin-top:0;'>{job['desc']}</p>", unsafe_allow_html=True)
     for bullet in job["bullets"]:
-        st.markdown(f"- {bullet}")
-    st.divider()
-
-# ── Key Projects ──────────────────────────────────────────────────────────────
-st.markdown("### Key Projects")
-
-projects = [
-    ("LA3.0 — GTM Stack Unification",
-     "Merged 15 tools into a unified stack post-acquisition, including 2 CRMs and 2 MAPs. Owned architecture, migration sequencing, and org-wide enablement."),
-    ("INSEE × SFDC Gap Detector",
-     "Custom data tool for Sales targeting French market accounts. Built using BigQuery + Salesforce API + Google Apps Script to surface accounts missing from CRM."),
-    ("Competitive Intelligence Pipeline",
-     "Python script that scrapes DNS, MX, CRT, and CNAME records to identify competitor tech deployments — used by SDRs for precision outbound targeting."),
-]
-for title, desc in projects:
-    st.markdown(f"**{title}**  \n{desc}")
-
-st.divider()
+        st.markdown(f"<p style='font-size:0.88rem;color:{DARK};line-height:1.6;margin:0.2rem 0 0.2rem 1rem;'>— {bullet}</p>", unsafe_allow_html=True)
+    st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── What I'm Looking For ──────────────────────────────────────────────────────
-st.markdown("### What I'm Looking For")
-st.markdown("""
-A senior RevOps or GTM Engineering role at a Series A–C SaaS company where I can:
-- Own the full GTM systems stack, not just administer it
-- Build AI-powered tooling that gives revenue teams a real edge
-- Work cross-functionally with Sales, Marketing, and Finance leadership
-- Have meaningful influence on how the company scales its go-to-market motion
-
+st.markdown(f"<h3 style='color:{DARK};font-weight:400;'>What I'm Looking For</h3>", unsafe_allow_html=True)
+st.markdown(f"""
+<p style='color:{DARK};font-size:0.92rem;line-height:1.7;'>
+A senior RevOps or GTM Engineering role at a Series A–C SaaS company where I can:<br>
+— Own the full GTM systems stack, not just administer it<br>
+— Build AI-powered tooling that gives revenue teams a real edge<br>
+— Work cross-functionally with Sales, Marketing, and Finance leadership<br>
+— Have meaningful influence on how the company scales its go-to-market motion<br><br>
 Remote-first or hybrid. Compensation commensurate with scope.
-""")
+</p>
+""", unsafe_allow_html=True)

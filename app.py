@@ -178,7 +178,6 @@ def home_page():
         </div>
         """, unsafe_allow_html=True)
         if st.button("View Project", key="proj_la3", type="primary", use_container_width=True):
-            st.session_state["project_tab"] = 0
             st.switch_page("pages/6_Projects.py")
 
     with p2:
@@ -191,7 +190,6 @@ def home_page():
         </div>
         """, unsafe_allow_html=True)
         if st.button("View Project", key="proj_ai", type="primary", use_container_width=True):
-            st.session_state["project_tab"] = 1
             st.switch_page("pages/6_Projects.py")
 
     with p3:
@@ -204,10 +202,10 @@ def home_page():
         </div>
         """, unsafe_allow_html=True)
         if st.button("View Project", key="proj_meddpic", type="primary", use_container_width=True):
-            st.session_state["project_tab"] = 3
             st.switch_page("pages/6_Projects.py")
 
     if st.button("View All Projects", key="card_projects", type="secondary"):
+        st.session_state.pop("selected_project_id", None)
         st.switch_page("pages/6_Projects.py")
 
     st.markdown("<hr>", unsafe_allow_html=True)

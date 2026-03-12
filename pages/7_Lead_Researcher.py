@@ -28,7 +28,7 @@ st.markdown(f"<p style='color:{DARK};'>Paste a LinkedIn bio or company 'About Us
 st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── API Key ───────────────────────────────────────────────────────────────────
-GEMINI_MODEL = "gemini-2.0-flash"
+GEMINI_MODEL = "gemini-2.5-flash"
 
 if "gemini_api_key" not in st.session_state:
     st.session_state.gemini_api_key = None

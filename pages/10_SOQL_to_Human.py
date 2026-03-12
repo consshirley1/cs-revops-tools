@@ -24,7 +24,7 @@ st.markdown(f"<p style='color:{DARK};'>Converts plain English to Salesforce SOQL
 st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── API Key ───────────────────────────────────────────────────────────────────
-GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_MODEL = "gemini-2.5-flash"
 
 if "gemini_api_key" not in st.session_state:
     st.session_state.gemini_api_key = None
@@ -183,7 +183,7 @@ st.markdown('<div class="section-label">How It Works</div>', unsafe_allow_html=T
 
 mermaid_chart("""
 flowchart TB
-    A([Plain English Request]) --> B[Gemini 1.5 Flash]
+    A([Plain English Request]) --> B[Gemini 2.5 Flash]
     B --> C([AI-Generated SOQL])
     D([Object + Fields + Conditions]) --> E[Visual Query Builder]
     E --> F([Generated SOQL + Logic Map])

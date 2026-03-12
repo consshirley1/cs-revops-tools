@@ -20,7 +20,7 @@ st.markdown('<div class="page-title">Company <span>Summarizer</span></div>', uns
 st.markdown(f"<p style='color:{DARK};'>Enter a company name or domain and get an AI-generated RevOps-focused one-pager.</p>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
-GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_MODEL = "gemini-2.5-flash"
 
 if "gemini_api_key" not in st.session_state:
     st.session_state.gemini_api_key = None
