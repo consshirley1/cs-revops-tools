@@ -60,6 +60,54 @@ def home_page():
     st.markdown("<hr>", unsafe_allow_html=True)
 
     # ── Tools — Row 1 ─────────────────────────────────────────────────────────
+    # ── Projects ──────────────────────────────────────────────────────────────
+    st.markdown('<div class="section-label">Strategic Projects</div>', unsafe_allow_html=True)
+
+    p1, p2, p3 = st.columns(3)
+
+    with p1:
+        st.markdown(f"""
+        <div class="tool-card">
+            <div class="tool-name">GTM Stack Unification</div>
+            <span class="tool-badge badge-live">LumApps · 2024–2025</span>
+            <div class="tool-desc">Merged 15 tools into a single unified stack post-acquisition,
+            including 2 CRMs and 2 MAPs — across a 150-person GTM org.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("View Project", key="proj_la3", type="primary", use_container_width=True):
+            st.switch_page("pages/6_Projects.py")
+
+    with p2:
+        st.markdown(f"""
+        <div class="tool-card">
+            <div class="tool-name">AI Micro-App Suite</div>
+            <span class="tool-badge badge-ai">AI-Powered · Claude + Gemini</span>
+            <div class="tool-desc">5 production AI apps shipped in 6 weeks: intent enrichment,
+            data enrichment, one-pager generation, inbound SDR, and competitor detection.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("View Project", key="proj_ai", type="primary", use_container_width=True):
+            st.switch_page("pages/6_Projects.py")
+
+    with p3:
+        st.markdown(f"""
+        <div class="tool-card">
+            <div class="tool-name">MEDDPIC & Forecast Rebuild</div>
+            <span class="tool-badge badge-live">LumApps · 2022–2023</span>
+            <div class="tool-desc">Standardized MEDDPIC across an 80-person international org
+            and rebuilt forecast infrastructure — improving accuracy by 60%+.</div>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("View Project", key="proj_meddpic", type="primary", use_container_width=True):
+            st.switch_page("pages/6_Projects.py")
+
+    if st.button("View All Projects", key="card_projects", type="secondary"):
+        st.session_state.pop("selected_project_id", None)
+        st.switch_page("pages/6_Projects.py")
+
+    st.markdown("<hr>", unsafe_allow_html=True)
+
+    # ── Tools ─────────────────────────────────────────────────────────────────
     st.markdown('<div class="section-label">Tools & Demos</div>', unsafe_allow_html=True)
 
     t1, t2, t3 = st.columns(3)
@@ -159,53 +207,6 @@ def home_page():
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
-    # ── Projects ──────────────────────────────────────────────────────────────
-    st.markdown('<div class="section-label">Strategic Projects</div>', unsafe_allow_html=True)
-
-    p1, p2, p3 = st.columns(3)
-
-    with p1:
-        st.markdown(f"""
-        <div class="tool-card">
-            <div class="tool-name">GTM Stack Unification</div>
-            <span class="tool-badge badge-live">LumApps · 2024–2025</span>
-            <div class="tool-desc">Merged 15 tools into a single unified stack post-acquisition,
-            including 2 CRMs and 2 MAPs — across a 150-person GTM org.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("View Project", key="proj_la3", type="primary", use_container_width=True):
-            st.switch_page("pages/6_Projects.py")
-
-    with p2:
-        st.markdown(f"""
-        <div class="tool-card">
-            <div class="tool-name">AI Micro-App Suite</div>
-            <span class="tool-badge badge-ai">AI-Powered · Claude + Gemini</span>
-            <div class="tool-desc">5 production AI apps shipped in 6 weeks: intent enrichment,
-            data enrichment, one-pager generation, inbound SDR, and competitor detection.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("View Project", key="proj_ai", type="primary", use_container_width=True):
-            st.switch_page("pages/6_Projects.py")
-
-    with p3:
-        st.markdown(f"""
-        <div class="tool-card">
-            <div class="tool-name">MEDDPIC & Forecast Rebuild</div>
-            <span class="tool-badge badge-live">LumApps · 2022–2023</span>
-            <div class="tool-desc">Standardized MEDDPIC across an 80-person international org
-            and rebuilt forecast infrastructure — improving accuracy by 60%+.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("View Project", key="proj_meddpic", type="primary", use_container_width=True):
-            st.switch_page("pages/6_Projects.py")
-
-    if st.button("View All Projects", key="card_projects", type="secondary"):
-        st.session_state.pop("selected_project_id", None)
-        st.switch_page("pages/6_Projects.py")
-
-    st.markdown("<hr>", unsafe_allow_html=True)
-
     # ── About & Background ────────────────────────────────────────────────────
     st.markdown('<div class="section-label">About & Background</div>', unsafe_allow_html=True)
 
@@ -233,7 +234,7 @@ def home_page():
         """, unsafe_allow_html=True)
         st.link_button(
             "Connect on LinkedIn",
-            "https://www.linkedin.com/in/connorshirley/",
+            "https://www.linkedin.com/in/connor-shirley-93986954/",
             use_container_width=True,
         )
 
