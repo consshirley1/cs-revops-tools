@@ -46,11 +46,33 @@ div.stButton > button[kind="secondary"] {{
 }}
 div.stButton > button[kind="secondary"]:hover {{ background-color: {DARK} !important; }}
 
+/* ── Equal-height columns ── */
+div[data-testid="stHorizontalBlock"] {{
+    align-items: stretch;
+}}
+div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {{
+    display: flex;
+    flex-direction: column;
+}}
+div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] {{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}}
+div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stMarkdownContainer"] {{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}}
+div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] > div[data-testid="stVerticalBlock"] > div[data-testid="stMarkdownContainer"] > div.tool-card {{
+    flex: 1;
+}}
+
 /* ── Cards ── */
 .tool-card {{
     border: 1px solid {TEAL_LIGHT}; border-radius: 8px;
     padding: 1.25rem 1.25rem 0.75rem 1.25rem; background: #ffffff;
-    display: flex; flex-direction: column; height: 100%;
+    display: flex; flex-direction: column;
 }}
 .tool-name {{ font-size: 1rem; font-weight: 600; color: {DARK}; margin-bottom: 0.2rem; }}
 .tool-badge {{
