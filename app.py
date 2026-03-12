@@ -42,13 +42,8 @@ def home_page():
         </div>
         """, unsafe_allow_html=True)
 
-        b1, b2 = st.columns(2)
-        with b1:
-            if st.button("About Me", key="hero_about", type="primary", use_container_width=True):
-                st.switch_page("pages/1_About.py")
-        with b2:
-            if st.button("View Resume", key="hero_resume", type="secondary", use_container_width=True):
-                st.switch_page("pages/2_Resume.py")
+        if st.button("About Me", key="hero_about", type="primary"):
+            st.switch_page("pages/1_About.py")
 
     with col_stats:
         st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
@@ -214,7 +209,7 @@ def home_page():
     # ── About & Background ────────────────────────────────────────────────────
     st.markdown('<div class="section-label">About & Background</div>', unsafe_allow_html=True)
 
-    a1, a2, a3 = st.columns(3)
+    a1, a2 = st.columns(2)
 
     with a1:
         st.markdown(f"""
@@ -229,17 +224,6 @@ def home_page():
             st.switch_page("pages/1_About.py")
 
     with a2:
-        st.markdown(f"""
-        <div class="info-card">
-            <div class="info-title">Resume</div>
-            <div class="info-desc">Full work history including LumApps, Acquire.io, Chili Piper, and Bright.md.
-            View inline or download the PDF directly.</div>
-        </div>
-        """, unsafe_allow_html=True)
-        if st.button("View Resume", key="card_resume", type="secondary", use_container_width=True):
-            st.switch_page("pages/2_Resume.py")
-
-    with a3:
         st.markdown(f"""
         <div class="info-card">
             <div class="info-title">Get In Touch</div>
@@ -286,8 +270,10 @@ pg = st.navigation(
             st.Page(home_page, title="Home", default=True),
         ],
         "Background": [
-            st.Page("pages/1_About.py",  title="About"),
-            st.Page("pages/2_Resume.py", title="Resume"),
+            st.Page("pages/1_About.py", title="About"),
+        ],
+        "Projects": [
+            st.Page("pages/6_Projects.py", title="Projects"),
         ],
         "Tools": [
             st.Page("pages/3_MX_Lookup.py",          title="MX Lookup"),
@@ -297,9 +283,6 @@ pg = st.navigation(
             st.Page("pages/8_SFDC_Account_Mapper.py", title="White Space Mapper"),
             st.Page("pages/9_SFDC_Perm.py",           title="Permission Auditor"),
             st.Page("pages/10_SOQL_to_Human.py",      title="SOQL Translator"),
-        ],
-        "Projects": [
-            st.Page("pages/6_Projects.py", title="Projects"),
         ],
     }
 )
