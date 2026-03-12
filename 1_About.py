@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="About — Connor Smith", page_icon="👤", layout="wide")
+st.set_page_config(page_title="About — Connor Shirley", page_icon="👤", layout="wide")
 
 st.markdown("""
 <style>
@@ -36,9 +36,10 @@ with col_main:
 
     st.markdown("""
     <div class="highlight">
-    I build the systems, processes, and tooling that let go-to-market teams scale with precision.
-    My background spans CRM architecture, GTM stack rollouts, and AI-powered automation —
-    with a consistent focus on closing the gap between strategic intent and operational execution.
+    I build the systems that make revenue teams faster — from CRM architecture and tool stack design to
+    AI agents and custom micro-apps. Seven years scaling B2B SaaS GTM from seed to PE exit, with 
+    hands-on ownership of forecasting, acquisition integrations, and live AI deployment. I sit at the
+    intersection of GTM and engineering, which means I can design it, build it, and get buy-in on it.
     </div>
     """, unsafe_allow_html=True)
 
@@ -108,7 +109,6 @@ with col_side:
     st.markdown('<div class="section-label">Contact</div>', unsafe_allow_html=True)
     st.markdown("""
     📧 connor@example.com  
-    💼 [LinkedIn](https://linkedin.com/in/connor)  
-    🐙 [GitHub](https://github.com/connor)
+    💼 [LinkedIn](https://www.linkedin.com/in/connor-shirley-93986954/)  
     """)
     st.info("👉 Update contact details before deploying.")
