@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT
 
 st.set_page_config(page_title="About — Connor Shirley", page_icon=None, layout="wide")
@@ -189,3 +190,16 @@ A senior RevOps or GTM Engineering role at a Series A–C SaaS company where I c
 Remote-first or hybrid. Compensation commensurate with scope.
 </p>
 """, unsafe_allow_html=True)
+
+st.markdown("<hr>", unsafe_allow_html=True)
+resume_path = Path("assets/resume.pdf")
+if resume_path.exists():
+    st.download_button(
+        label="Download Resume (PDF)",
+        data=resume_path.read_bytes(),
+        file_name="Connor_Shirley_Resume.pdf",
+        mime="application/pdf",
+        type="primary",
+    )
+else:
+    st.markdown(f"<p style='font-size:0.85rem;color:{TEAL_MID};'>Resume PDF not available — contact me directly.</p>", unsafe_allow_html=True)
