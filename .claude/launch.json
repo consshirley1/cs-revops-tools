@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "Portfolio App",
-      "runtimeExecutable": "streamlit",
-      "runtimeArgs": ["run", "app.py", "--server.port", "8501"],
+      "runtimeExecutable": "C:\\Python313\\python.exe",
+      "runtimeArgs": ["-m", "streamlit", "run", "app.py", "--server.port", "8501", "--server.headless", "true"],
       "port": 8501
     }
   ]
