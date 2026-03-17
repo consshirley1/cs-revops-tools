@@ -55,7 +55,7 @@ def home_page():
         with s2:
             st.markdown(f'<div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Production<br>Apps Shipped</div></div>', unsafe_allow_html=True)
             st.markdown("<div style='height:0.6rem'></div>", unsafe_allow_html=True)
-            st.markdown(f'<div class="stat-box"><div class="stat-num">$140M</div><div class="stat-label">Company Scale<br>Owned</div></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="stat-box"><div class="stat-num">$140M</div><div class="stat-label">ARR<br>RevOps<br>Ownership</div></div>', unsafe_allow_html=True)
 
     st.markdown("<hr>", unsafe_allow_html=True)
 
