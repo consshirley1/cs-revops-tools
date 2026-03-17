@@ -34,9 +34,9 @@ def home_page():
     with col_hero:
         st.markdown(f"""
         <div class="hero-name">Connor <span>Shirley</span></div>
-        <div class="hero-sub">RevOps Leader turned GTM Engineer &nbsp;·&nbsp; AI Deployment &nbsp;·&nbsp; CRM Architecture</div>
+        <div class="hero-sub">RevOps Leader &nbsp;·&nbsp; GTM Engineer &nbsp;·&nbsp; AI Deployment &nbsp;·&nbsp; CRM Architecture</div>
         <div class="hero-body">
-            I build the systems that make revenue teams faster — from CRM architecture and tool stack
+            I build the systems that make revenue teams more efficient and profitable — from CRM architecture and tool stack
             design to AI agents and custom micro-apps. Seven years scaling B2B SaaS from seed to PE exit.
             Browse the tools below or learn more about my background.
         </div>
