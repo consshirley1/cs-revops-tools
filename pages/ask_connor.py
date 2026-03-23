@@ -72,8 +72,8 @@ def is_injection(text: str) -> bool:
 if "ask_messages" not in st.session_state:
     st.session_state.ask_messages = []
 
-if "ask_input" not in st.session_state:
-    st.session_state.ask_input = ""
+if "ask_pending" not in st.session_state:
+    st.session_state.ask_pending = None
 
 # ── Header ───────────────────────────────────────────────────────────────────
 st.markdown('<div class="page-title">Ask <span>Connor</span></div>', unsafe_allow_html=True)
@@ -97,54 +97,25 @@ chip_cols = st.columns(len(SUGGESTIONS))
 for i, suggestion in enumerate(SUGGESTIONS):
     with chip_cols[i]:
         if st.button(suggestion, key=f"chip_{i}", use_container_width=True):
-            st.session_state.ask_input = suggestion
+            st.session_state.ask_pending = suggestion
             st.rerun()
 
 st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
 
-# ── Chat history display ─────────────────────────────────────────────────────
-for msg in st.session_state.ask_messages:
-    if msg["role"] == "user":
-        st.markdown(f'<div class="chat-user">{msg["content"]}</div>', unsafe_allow_html=True)
-    else:
-        st.markdown(f'<div class="chat-assistant">{msg["content"]}</div>', unsafe_allow_html=True)
 
-# ── Input row ────────────────────────────────────────────────────────────────
-col_input, col_send, col_clear = st.columns([6, 1, 1])
-
-with col_input:
-    user_input = st.text_input(
-        "Ask a question about Connor's background, projects, or tools",
-        value=st.session_state.ask_input,
-        key="ask_text_input",
-        label_visibility="collapsed",
-        placeholder="Ask about Connor's experience, projects, or tools…",
-    )
-
-with col_send:
-    send = st.button("Send", type="primary", use_container_width=True)
-
-with col_clear:
-    if st.button("Clear", use_container_width=True):
-        st.session_state.ask_messages = []
-        st.session_state.ask_input = ""
-        st.rerun()
-
-# ── Send logic ───────────────────────────────────────────────────────────────
-if send and user_input:
-    st.session_state.ask_input = ""
-
-    if is_injection(user_input):
-        st.session_state.ask_messages.append({"role": "user", "content": user_input})
+# ── Helper: send a message and get a reply ───────────────────────────────────
+def _send_message(text: str):
+    """Append user message, call API, append reply, rerun."""
+    if is_injection(text):
+        st.session_state.ask_messages.append({"role": "user", "content": text})
         st.session_state.ask_messages.append({
             "role": "assistant",
             "content": "I'm here to answer questions about Connor's background and portfolio. I can't help with that request, but feel free to ask about his experience, projects, or tools!",
         })
         st.rerun()
 
-    st.session_state.ask_messages.append({"role": "user", "content": user_input})
+    st.session_state.ask_messages.append({"role": "user", "content": text})
 
-    # Build API messages from history
     api_messages = [
         {"role": m["role"], "content": m["content"]}
         for m in st.session_state.ask_messages
@@ -165,6 +136,43 @@ if send and user_input:
 
     st.session_state.ask_messages.append({"role": "assistant", "content": reply})
     st.rerun()
+
+
+# ── Process pending chip click (before rendering chat) ───────────────────────
+if st.session_state.ask_pending:
+    pending = st.session_state.ask_pending
+    st.session_state.ask_pending = None
+    _send_message(pending)
+
+# ── Chat history display ─────────────────────────────────────────────────────
+for msg in st.session_state.ask_messages:
+    if msg["role"] == "user":
+        st.markdown(f'<div class="chat-user">{msg["content"]}</div>', unsafe_allow_html=True)
+    else:
+        st.markdown(f'<div class="chat-assistant">{msg["content"]}</div>', unsafe_allow_html=True)
+
+# ── Input row ────────────────────────────────────────────────────────────────
+col_input, col_send, col_clear = st.columns([6, 1, 1])
+
+with col_input:
+    user_input = st.text_input(
+        "Ask a question about Connor's background, projects, or tools",
+        key="ask_text_input",
+        label_visibility="collapsed",
+        placeholder="Ask about Connor's experience, projects, or tools…",
+    )
+
+with col_send:
+    send = st.button("Send", type="primary", use_container_width=True)
+
+with col_clear:
+    if st.button("Clear", use_container_width=True):
+        st.session_state.ask_messages = []
+        st.rerun()
+
+# ── Send logic ───────────────────────────────────────────────────────────────
+if send and user_input:
+    _send_message(user_input)
 
 elif send and not user_input:
     st.warning("Please type a question first.")
