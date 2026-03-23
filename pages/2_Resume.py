@@ -2,8 +2,10 @@ import streamlit as st
 import base64
 from pathlib import Path
 from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT
+from sidebar import render_sidebar
 
 st.set_page_config(page_title="Resume — Connor Shirley", page_icon=None, layout="wide")
+render_sidebar()
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
 st.markdown('<div class="page-title">Resume — Connor <span>Shirley</span></div>', unsafe_allow_html=True)

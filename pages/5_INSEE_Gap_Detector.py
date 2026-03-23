@@ -2,8 +2,10 @@ import streamlit as st
 import pandas as pd
 import random
 from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT, mermaid_chart
+from sidebar import render_sidebar
 
 st.set_page_config(page_title="INSEE Gap Detector", page_icon="🇫🇷", layout="wide")
+render_sidebar()
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
 st.markdown(f"""

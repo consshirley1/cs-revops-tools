@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT
+from sidebar import render_sidebar
 
 
 def home_page():
@@ -9,6 +10,7 @@ def home_page():
         page_icon="⚙️",
         layout="wide",
     )
+    render_sidebar()
 
     st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
@@ -272,6 +274,7 @@ pg = st.navigation(
         ],
         "Background": [
             st.Page("pages/1_About.py", title="About"),
+            st.Page("pages/ask_connor.py", title="Ask Connor"),
         ],
         "Projects": [
             st.Page("pages/6_Projects.py", title="Projects"),

@@ -1,7 +1,9 @@
 import streamlit as st
 from shared import COMMON_CSS, DARK, TEAL_DARK, TEAL_MID, TEAL_LIGHT, PROJECTS
+from sidebar import render_sidebar
 
 st.set_page_config(page_title="Project Detail — Connor Shirley", page_icon=None, layout="wide")
+render_sidebar()
 st.markdown(COMMON_CSS, unsafe_allow_html=True)
 
 st.markdown(f"""
